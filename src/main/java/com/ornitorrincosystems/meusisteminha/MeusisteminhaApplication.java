@@ -7,14 +7,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.ornitorrincosystems.meusisteminha.entities.People;
-import com.ornitorrincosystems.meusisteminha.repositories.PeopleRepository;
+import com.ornitorrincosystems.meusisteminha.entities.Person;
+import com.ornitorrincosystems.meusisteminha.repositories.PersonRepository;
 
 @SpringBootApplication
 public class MeusisteminhaApplication implements CommandLineRunner {
 	
 	@Autowired
-	PeopleRepository peopleRepo;
+	PersonRepository personRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MeusisteminhaApplication.class, args);
@@ -23,10 +23,10 @@ public class MeusisteminhaApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		People p1 = new People(null, "Fabio de Oliveira Prudencio", "07138744900", null, null, "47992090158", "fabio.oliveira.prudencio@gmail.com");
-		People p2 = new People(null, "Giulia Grasielle Lütke", null, null, null, null, "giulialutke@gmail.com");
+		Person p1 = new Person(null, "Fabio de Oliveira Prudencio", "07138744900", null, null, "47992090158", "fabio.oliveira.prudencio@gmail.com");
+		Person p2 = new Person(null, "Giulia Grasielle Lütke", null, null, null, null, "giulialutke@gmail.com");
 		
-		peopleRepo.saveAll(Arrays.asList(p1,p2));
+		personRepo.saveAll(Arrays.asList(p1,p2));
 		
 	}
 

@@ -10,29 +10,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ornitorrincosystems.meusisteminha.entities.People;
-import com.ornitorrincosystems.meusisteminha.services.PeopleService;
+import com.ornitorrincosystems.meusisteminha.entities.Person;
+import com.ornitorrincosystems.meusisteminha.services.PersonService;
 
 @RestController
 @RequestMapping(value="/peoples")
-public class PeopleResource {
+public class PersonResource {
 	
 	@Autowired
-	PeopleService serv;
+	PersonService serv;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)	
-	public ResponseEntity<People> findById(@PathVariable Integer id) {
-		People obj = serv.findById(id);
+	public ResponseEntity<Person> findById(@PathVariable Integer id) {
+		Person obj = serv.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}	
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public List<People> listAll() {
+	public List<Person> listAll() {
 		
-		People p1 = new People(1, "Fabio de Oliveira Prudencio", "07138744900", null, null, "47992090158", "fabio.oliveira.prudencio@gmail.com");
-		People p2 = new People(2, "Giulia Grasielle Lütke", null, null, null, null, "giulialutke@gmail.com");
+		Person p1 = new Person(1, "Fabio de Oliveira Prudencio", "07138744900", null, null, "47992090158", "fabio.oliveira.prudencio@gmail.com");
+		Person p2 = new Person(2, "Giulia Grasielle Lütke", null, null, null, null, "giulialutke@gmail.com");
 		
-		List<People> list = new ArrayList<>();
+		List<Person> list = new ArrayList<>();
 		list.add(p1);
 		list.add(p2);
 		
