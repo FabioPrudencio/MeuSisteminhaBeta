@@ -14,7 +14,7 @@ import com.ornitorrincosystems.meusisteminha.entities.Person;
 import com.ornitorrincosystems.meusisteminha.services.PersonService;
 
 @RestController
-@RequestMapping(value="/peoples")
+@RequestMapping(value="/person")
 public class PersonResource {
 	
 	@Autowired

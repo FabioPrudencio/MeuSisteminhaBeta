@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ornitorrincosystems.meusisteminha.entities.Exam;
 import com.ornitorrincosystems.meusisteminha.repositories.ExamRepository;
+import com.ornitorrincosystems.meusisteminha.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ExamService {
@@ -16,7 +17,8 @@ public class ExamService {
 
 	public Exam findById(Integer id) {
 		Optional<Exam> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Object don't finded! Id: " + id + ", Type: " + Exam.class.getName()));
 	}
 
 }

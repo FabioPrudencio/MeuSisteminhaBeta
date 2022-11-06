@@ -7,16 +7,18 @@ import org.springframework.stereotype.Service;
 
 import com.ornitorrincosystems.meusisteminha.entities.Person;
 import com.ornitorrincosystems.meusisteminha.repositories.PersonRepository;
+import com.ornitorrincosystems.meusisteminha.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class PersonService {
-	
+
 	@Autowired
 	PersonRepository repo;
-	
+
 	public Person findById(Integer id) {
 		Optional<Person> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Object don't finded! Id: " + id + ", Type: " + Person.class.getName()));
 	}
 
 }
