@@ -7,12 +7,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.ornitorrincosystems.meusisteminha.entities.City;
 import com.ornitorrincosystems.meusisteminha.entities.Exam;
 import com.ornitorrincosystems.meusisteminha.entities.ExamType;
 import com.ornitorrincosystems.meusisteminha.entities.Person;
+import com.ornitorrincosystems.meusisteminha.entities.State;
+import com.ornitorrincosystems.meusisteminha.repositories.CityRepository;
 import com.ornitorrincosystems.meusisteminha.repositories.ExamRepository;
 import com.ornitorrincosystems.meusisteminha.repositories.ExamTypeRepository;
 import com.ornitorrincosystems.meusisteminha.repositories.PersonRepository;
+import com.ornitorrincosystems.meusisteminha.repositories.StateRepository;
 
 @SpringBootApplication
 public class MeusisteminhaApplication implements CommandLineRunner {
@@ -25,6 +29,12 @@ public class MeusisteminhaApplication implements CommandLineRunner {
 	
 	@Autowired
 	ExamTypeRepository examTypeRepo;
+	
+	@Autowired
+	StateRepository stateRepo;
+	
+	@Autowired
+	CityRepository cityRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MeusisteminhaApplication.class, args);
@@ -50,9 +60,16 @@ public class MeusisteminhaApplication implements CommandLineRunner {
 		Person p1 = new Person(null, "Fabio de Oliveira Prudencio", "07138744900", null, null, "47992090158", "fabio.oliveira.prudencio@gmail.com");
 		Person p2 = new Person(null, "Giulia Grasielle Lütke", null, null, null, null, "giulialutke@gmail.com");
 		
+		State state = new State(null, "Santa Catarina");		
+		City city = new City(null, "Joinville", state);
+		
+		state.getCities().add(city);
+		
 		examTypeRepo.saveAll(Arrays.asList(examType1,examType2));
 		examRepo.saveAll(Arrays.asList(exam1, exam2, exam3));
 		personRepo.saveAll(Arrays.asList(p1,p2));
+		stateRepo.save(state);
+		cityRepo.save(city);
 		
 	}
 
