@@ -57,8 +57,8 @@ public class MeusisteminhaApplication implements CommandLineRunner {
 		exam2.getExamTypes().addAll(Arrays.asList(examType1));
 		exam3.getExamTypes().addAll(Arrays.asList(examType2));
 		
-		Person p1 = new Person(null, "Fabio de Oliveira Prudencio", "07138744900", null, null, "47992090158", "fabio.oliveira.prudencio@gmail.com");
-		Person p2 = new Person(null, "Giulia Grasielle Lütke", null, null, null, null, "giulialutke@gmail.com");
+		Person p1 = new Person(null, "Fabio de Oliveira Prudencio", "07138744900", null, null, "fabio.oliveira.prudencio@gmail.com", null);
+		Person p2 = new Person(null, "Giulia Grasielle Lütke", null, null, null, "giulialutke@gmail.com", null);
 		
 		State state = new State(null, "Santa Catarina");		
 		City city = new City(null, "Joinville", state);

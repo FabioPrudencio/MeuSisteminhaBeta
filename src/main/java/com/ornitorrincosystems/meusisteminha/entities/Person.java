@@ -1,41 +1,53 @@
 package com.ornitorrincosystems.meusisteminha.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.ornitorrincosystems.meusisteminha.entities.enums.PersonType;
 
 @Entity
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String completeName;
 	private String cpf;
 	private String cnpj;
 	private Date birthDate;
-	private String phoneNumber;
 	private String email;
+	private Integer personType;
+
+	@OneToMany(mappedBy="person")
+	private List<Address> adresses = new ArrayList<>();
+
+	private Set<String> phoneNumbers = new HashSet<>();
 
 	public Person() {
 	}
 
-	public Person(Integer id, String completeName, String cpf, String cnpj, Date birthDate, String phoneNumber,
-			String email) {
+	public Person(Integer id, String completeName, String cpf, String cnpj, Date birthDate, String email,
+			PersonType personType) {
 		super();
 		this.id = id;
 		this.completeName = completeName;
 		this.cpf = cpf;
 		this.cnpj = cnpj;
 		this.birthDate = birthDate;
-		this.phoneNumber = phoneNumber;
 		this.email = email;
+		this.personType = personType.getCod();
 	}
 
 	public Integer getId() {
@@ -78,20 +90,20 @@ public class Person implements Serializable {
 		this.birthDate = birthDate;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public PersonType getPersonType() {
+		return PersonType.toEnum(id);
+	}
+
+	public void setPersonType(PersonType personType) {
+		this.personType = personType.getCod();
 	}
 
 	@Override
@@ -109,12 +121,6 @@ public class Person implements Serializable {
 			return false;
 		Person other = (Person) obj;
 		return Objects.equals(id, other.id);
-	}
-
-	@Override
-	public String toString() {
-		return "People [id=" + id + ", completeName=" + completeName + ", cpf=" + cpf + ", cnpj=" + cnpj
-				+ ", birthDate=" + birthDate + ", phoneNumber=" + phoneNumber + ", email=" + email + "]";
 	}
 
 }

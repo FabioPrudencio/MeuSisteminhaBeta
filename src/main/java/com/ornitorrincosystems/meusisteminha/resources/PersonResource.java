@@ -29,8 +29,8 @@ public class PersonResource {
 	@RequestMapping(method=RequestMethod.GET)
 	public List<Person> listAll() {
 		
-		Person p1 = new Person(1, "Fabio de Oliveira Prudencio", "07138744900", null, null, "47992090158", "fabio.oliveira.prudencio@gmail.com");
-		Person p2 = new Person(2, "Giulia Grasielle Lütke", null, null, null, null, "giulialutke@gmail.com");
+		Person p1 = new Person(1, "Fabio de Oliveira Prudencio", "07138744900", null, null, "fabio.oliveira.prudencio@gmail.com", null);
+		Person p2 = new Person(2, "Giulia Grasielle Lütke", null, null, null, "giulialutke@gmail.com", null);
 		
 		List<Person> list = new ArrayList<>();
 		list.add(p1);
