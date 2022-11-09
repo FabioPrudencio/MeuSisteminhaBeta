@@ -7,11 +7,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.ornitorrincosystems.meusisteminha.entities.City;
 import com.ornitorrincosystems.meusisteminha.entities.Exam;
 import com.ornitorrincosystems.meusisteminha.entities.ExamType;
 import com.ornitorrincosystems.meusisteminha.entities.Person;
-import com.ornitorrincosystems.meusisteminha.entities.State;
+import com.ornitorrincosystems.meusisteminha.entities.enums.PersonType;
 import com.ornitorrincosystems.meusisteminha.repositories.CityRepository;
 import com.ornitorrincosystems.meusisteminha.repositories.ExamRepository;
 import com.ornitorrincosystems.meusisteminha.repositories.ExamTypeRepository;
@@ -57,19 +56,23 @@ public class MeusisteminhaApplication implements CommandLineRunner {
 		exam2.getExamTypes().addAll(Arrays.asList(examType1));
 		exam3.getExamTypes().addAll(Arrays.asList(examType2));
 		
-		Person p1 = new Person(null, "Fabio de Oliveira Prudencio", "07138744900", null, null, "fabio.oliveira.prudencio@gmail.com", null);
-		Person p2 = new Person(null, "Giulia Grasielle Lütke", null, null, null, "giulialutke@gmail.com", null);
+		examTypeRepo.saveAll(Arrays.asList(examType1,examType2));
+		examRepo.saveAll(Arrays.asList(exam1, exam2, exam3));
 		
-		State state = new State(null, "Santa Catarina");		
+		
+		
+		Person p1 = new Person(null, "Fabio de Oliveira Prudencio", "07138744900", null, null, "fabio.oliveira.prudencio@gmail.com", PersonType.FISICPERSON);
+		Person p2 = new Person(null, "Giulia Grasielle Lütke", null, null, null, "giulialutke@gmail.com", PersonType.FISICPERSON);
+		
+		personRepo.saveAll(Arrays.asList(p1,p2));
+		
+		/*State state = new State(null, "Santa Catarina");		
 		City city = new City(null, "Joinville", state);
 		
 		state.getCities().add(city);
 		
-		examTypeRepo.saveAll(Arrays.asList(examType1,examType2));
-		examRepo.saveAll(Arrays.asList(exam1, exam2, exam3));
-		personRepo.saveAll(Arrays.asList(p1,p2));
 		stateRepo.save(state);
-		cityRepo.save(city);
+		cityRepo.save(city);*/
 		
 	}
 

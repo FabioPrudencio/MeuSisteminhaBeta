@@ -3,11 +3,15 @@ package com.ornitorrincosystems.meusisteminha.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,10 +34,17 @@ public class Person implements Serializable {
 	private String email;
 	private Integer personType;
 
+	
 	@OneToMany(mappedBy="person")
 	private List<Address> adresses = new ArrayList<>();
 
+	/*@ElementCollection
+	@CollectionTable(name="PHONE_NUMBER")
 	private Set<String> phoneNumbers = new HashSet<>();
+	
+	@ElementCollection
+	@CollectionTable(name="EMAILS")
+	private Map<String, String> emails = new HashMap<>();*/
 
 	public Person() {
 	}
