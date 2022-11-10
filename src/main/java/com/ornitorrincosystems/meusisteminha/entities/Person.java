@@ -34,17 +34,16 @@ public class Person implements Serializable {
 	private String email;
 	private Integer personType;
 
-	
-	@OneToMany(mappedBy="person")
+	@OneToMany(mappedBy = "person")
 	private List<Address> adresses = new ArrayList<>();
 
-	/*@ElementCollection
-	@CollectionTable(name="PHONE_NUMBER")
-	private Set<String> phoneNumbers = new HashSet<>();
-	
 	@ElementCollection
-	@CollectionTable(name="EMAILS")
-	private Map<String, String> emails = new HashMap<>();*/
+	@CollectionTable(name = "PHONE_NUMBER")
+	private Set<String> phoneNumbers = new HashSet<>();
+
+	@ElementCollection
+	@CollectionTable(name = "EMAILS")
+	private Map<Integer, String> emails = new HashMap<>();
 
 	public Person() {
 	}
@@ -107,6 +106,30 @@ public class Person implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<Address> getAdresses() {
+		return adresses;
+	}
+
+	public void setAdresses(List<Address> adresses) {
+		this.adresses = adresses;
+	}
+
+	public Set<String> getPhoneNumbers() {
+		return phoneNumbers;
+	}
+
+	public void setPhoneNumbers(Set<String> phoneNumbers) {
+		this.phoneNumbers = phoneNumbers;
+	}
+
+	public Map<Integer, String> getEmails() {
+		return emails;
+	}
+
+	public void setEmails(Map<Integer, String> emails) {
+		this.emails = emails;
 	}
 
 	public PersonType getPersonType() {

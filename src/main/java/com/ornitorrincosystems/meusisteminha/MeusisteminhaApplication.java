@@ -7,10 +7,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.ornitorrincosystems.meusisteminha.entities.Address;
+import com.ornitorrincosystems.meusisteminha.entities.City;
 import com.ornitorrincosystems.meusisteminha.entities.Exam;
 import com.ornitorrincosystems.meusisteminha.entities.ExamType;
 import com.ornitorrincosystems.meusisteminha.entities.Person;
+import com.ornitorrincosystems.meusisteminha.entities.State;
 import com.ornitorrincosystems.meusisteminha.entities.enums.PersonType;
+import com.ornitorrincosystems.meusisteminha.repositories.AddressRepository;
 import com.ornitorrincosystems.meusisteminha.repositories.CityRepository;
 import com.ornitorrincosystems.meusisteminha.repositories.ExamRepository;
 import com.ornitorrincosystems.meusisteminha.repositories.ExamTypeRepository;
@@ -28,6 +32,9 @@ public class MeusisteminhaApplication implements CommandLineRunner {
 	
 	@Autowired
 	ExamTypeRepository examTypeRepo;
+	
+	@Autowired
+	AddressRepository addressRepo;
 	
 	@Autowired
 	StateRepository stateRepo;
@@ -61,18 +68,32 @@ public class MeusisteminhaApplication implements CommandLineRunner {
 		
 		
 		
-		Person p1 = new Person(null, "Fabio de Oliveira Prudencio", "07138744900", null, null, "fabio.oliveira.prudencio@gmail.com", PersonType.FISICPERSON);
+		Person p1 = new Person(null, "Fabio de Oliveira Prudencio", "07138844900", null, null, "fabio.oliveira.prudencio@gmail.com", PersonType.FISICPERSON);
 		Person p2 = new Person(null, "Giulia Grasielle Lütke", null, null, null, "giulialutke@gmail.com", PersonType.FISICPERSON);
 		
+		p1.getPhoneNumbers().addAll(Arrays.asList("9999-7777", "8888-5555"));
+		p2.getPhoneNumbers().addAll(Arrays.asList("444-1234"));
+		
+		State state1 = new State(null, "Santa Catarina");
+		State state2 = new State(null, "São Paulo");
+		City city1 = new City(null, "Joinville", state1);
+		City city2 = new City(null, "São Paulo", state2);
+		
+		stateRepo.saveAll(Arrays.asList(state1,state2));
+		cityRepo.saveAll(Arrays.asList(city1,city2));
+		
+		Address adr1 = new Address(null, "Rua São João", "429", null, "Petrópolis", "89208-744", city1, p1);
+		Address adr2 = new Address(null, "Rua Pedro Rosa", "300", null, "Liberdade", "89000-500", city2, p1);
+		Address adr3 = new Address(null, "Rua dos Pedreiros", "501", null, "Petrópolis", "89980-744", city2, p2);
+		
+		p1.getAdresses().addAll(Arrays.asList(adr1,adr2));
+		p2.getAdresses().add(adr3);
+		
+		state1.getCities().add(city1);
+		state2.getCities().add(city2);
+		
 		personRepo.saveAll(Arrays.asList(p1,p2));
-		
-		/*State state = new State(null, "Santa Catarina");		
-		City city = new City(null, "Joinville", state);
-		
-		state.getCities().add(city);
-		
-		stateRepo.save(state);
-		cityRepo.save(city);*/
+		addressRepo.saveAll(Arrays.asList(adr1,adr2,adr3));
 		
 	}
 
