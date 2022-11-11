@@ -4,11 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
@@ -18,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ornitorrincosystems.meusisteminha.entities.enums.PersonType;
 
 @Entity
@@ -34,16 +33,17 @@ public class Person implements Serializable {
 	private String email;
 	private Integer personType;
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "person")
 	private List<Address> adresses = new ArrayList<>();
 
 	@ElementCollection
 	@CollectionTable(name = "PHONE_NUMBER")
-	private Set<String> phoneNumbers = new HashSet<>();
+	private Map<String, String> phoneNumbers = new HashMap<>();
 
 	@ElementCollection
 	@CollectionTable(name = "EMAILS")
-	private Map<Integer, String> emails = new HashMap<>();
+	private Map<String, String> emails = new HashMap<>();
 
 	public Person() {
 	}
@@ -116,24 +116,24 @@ public class Person implements Serializable {
 		this.adresses = adresses;
 	}
 
-	public Set<String> getPhoneNumbers() {
+	public Map<String, String> getPhoneNumbers() {
 		return phoneNumbers;
 	}
 
-	public void setPhoneNumbers(Set<String> phoneNumbers) {
+	public void setPhoneNumbers(Map<String, String> phoneNumbers) {
 		this.phoneNumbers = phoneNumbers;
 	}
 
-	public Map<Integer, String> getEmails() {
+	public Map<String, String> getEmails() {
 		return emails;
 	}
 
-	public void setEmails(Map<Integer, String> emails) {
+	public void setEmails(Map<String, String> emails) {
 		this.emails = emails;
 	}
 
 	public PersonType getPersonType() {
-		return PersonType.toEnum(id);
+		return PersonType.toEnum(personType);
 	}
 
 	public void setPersonType(PersonType personType) {

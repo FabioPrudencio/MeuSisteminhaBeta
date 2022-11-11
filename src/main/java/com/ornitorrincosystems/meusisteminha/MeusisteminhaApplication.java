@@ -1,6 +1,8 @@
 package com.ornitorrincosystems.meusisteminha;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -9,11 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.ornitorrincosystems.meusisteminha.entities.Address;
 import com.ornitorrincosystems.meusisteminha.entities.City;
-import com.ornitorrincosystems.meusisteminha.entities.Exam;
-import com.ornitorrincosystems.meusisteminha.entities.ExamType;
 import com.ornitorrincosystems.meusisteminha.entities.Person;
 import com.ornitorrincosystems.meusisteminha.entities.State;
 import com.ornitorrincosystems.meusisteminha.entities.enums.PersonType;
+import com.ornitorrincosystems.meusisteminha.medical.entities.Exam;
+import com.ornitorrincosystems.meusisteminha.medical.entities.ExamType;
 import com.ornitorrincosystems.meusisteminha.repositories.AddressRepository;
 import com.ornitorrincosystems.meusisteminha.repositories.CityRepository;
 import com.ornitorrincosystems.meusisteminha.repositories.ExamRepository;
@@ -71,9 +73,25 @@ public class MeusisteminhaApplication implements CommandLineRunner {
 		Person p1 = new Person(null, "Fabio de Oliveira Prudencio", "07138844900", null, null, "fabio.oliveira.prudencio@gmail.com", PersonType.FISICPERSON);
 		Person p2 = new Person(null, "Giulia Grasielle Lütke", null, null, null, "giulialutke@gmail.com", PersonType.FISICPERSON);
 		
-		p1.getPhoneNumbers().addAll(Arrays.asList("9999-7777", "8888-5555"));
-		p2.getPhoneNumbers().addAll(Arrays.asList("444-1234"));
+		Map<String, String> emails = new HashMap<>();
 		
+		emails.put("Personal", "fabio@gmail.com");
+		emails.put("Work", "fabio@danica.com");
+		
+		p1.getEmails().putAll(emails);
+		
+		Map<String, String> phones1 = new HashMap<>();
+		phones1.put("CelPhone", "999994444");
+		phones1.put("Work Phone", "34999999");
+		
+		p1.getPhoneNumbers().putAll(phones1);
+		
+		Map<String, String> phones2 = new HashMap<>();
+		phones2.put("CelPhone", "999994444");
+		phones2.put("Work Phone", "34999999");
+		
+		p2.getPhoneNumbers().putAll(phones2);
+						
 		State state1 = new State(null, "Santa Catarina");
 		State state2 = new State(null, "São Paulo");
 		City city1 = new City(null, "Joinville", state1);

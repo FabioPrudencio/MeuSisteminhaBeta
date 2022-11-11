@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ornitorrincosystems.meusisteminha.entities.Exam;
+import com.ornitorrincosystems.meusisteminha.medical.entities.Exam;
 import com.ornitorrincosystems.meusisteminha.services.ExamService;
 
 @RestController

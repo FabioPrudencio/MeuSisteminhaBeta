@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ornitorrincosystems.meusisteminha.entities.Exam;
+import com.ornitorrincosystems.meusisteminha.medical.entities.Exam;
 import com.ornitorrincosystems.meusisteminha.repositories.ExamRepository;
 import com.ornitorrincosystems.meusisteminha.services.exceptions.ObjectNotFoundException;
 

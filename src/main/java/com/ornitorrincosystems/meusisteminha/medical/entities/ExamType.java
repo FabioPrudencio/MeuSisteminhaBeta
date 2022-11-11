@@ -1,4 +1,4 @@
-package com.ornitorrincosystems.meusisteminha.entities;
+package com.ornitorrincosystems.meusisteminha.medical.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
